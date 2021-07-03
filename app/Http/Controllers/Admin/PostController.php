@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
@@ -20,10 +21,10 @@ class PostController extends Controller
     public function index()
     {
 
-        $data =[
-            'posts'=>Post::all()
+        $data = [
+            'posts' => Post::all()
         ];
-      return view("admin.posts.index", $data);
+        return view("admin.posts.index", $data);
     }
 
     /**
@@ -33,7 +34,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view("admin.posts.create");
+        $categories = Category::all();
+
+        return view("admin.posts.create", ["categories" => $categories]);
     }
 
     /**
@@ -44,6 +47,11 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required|max:255',
+            'content' => 'required',
+            'category_id' => "nullable|exists:categories,id"
+        ]);
         $newPostData = $request->all();
         $newPost = new Post();
         $newPost->fill($newPostData);
@@ -64,7 +72,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         return view("admin.posts.show", [
-            "post" =>$post
+            "post" => $post
         ]);
     }
 
@@ -74,13 +82,16 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        $post = Post::findOrFail($id);
+        $categories = Category::all();
 
-        return view("admin.posts.edit", [
-            "post" =>$post
-        ]);
+        $data = [
+            'post' => $post,
+            'categories' => $categories
+        ];
+
+        return view('admin.posts.edit', $data);
     }
 
     /**
@@ -92,6 +103,11 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'title' => 'required|max:255',
+            'content' => 'required',
+            'category_id' => "nullable|exists:categories,id"
+        ]);
         $post  = Post::findOrFail($id);
         $formData = $request->all();
 

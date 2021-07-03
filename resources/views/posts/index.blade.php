@@ -1,1 +1,1 @@
-@extends('layoust.public')
+@extends('layout.public')

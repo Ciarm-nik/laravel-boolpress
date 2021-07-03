@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+
 
 
 class PostController extends Controller
@@ -31,7 +33,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view("admin.posts.create");
     }
 
     /**
@@ -42,7 +44,15 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $newPostData = $request->all();
+        $newPost = new Post();
+        $newPost->fill($newPostData);
+
+        $newPost->user_id = $request->user()->id;
+
+        $newPost->save();
+
+        return redirect()->route('admin.posts.index', $newPost->id);
     }
 
     /**
@@ -51,9 +61,11 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        //
+        return view("admin.posts.show", [
+            "post" =>$post
+        ]);
     }
 
     /**
@@ -64,7 +76,11 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        return view("admin.posts.edit", [
+            "post" =>$post
+        ]);
     }
 
     /**
@@ -76,7 +92,12 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post  = Post::findOrFail($id);
+        $formData = $request->all();
+
+        $post->update($formData);
+
+        return redirect()->route("admin.posts.index");
     }
 
     /**
@@ -85,8 +106,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect()->route('admin.posts.index');
     }
 }

@@ -6,10 +6,7 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="d-flex justify-content-between align-items-center">
-                <h1>Tutte le categorie</h1>
-                <a href="{{ route('admin.posts.create') }}" class="btn btn-primary">
-                    Crea nuovo post
-                </a>
+                <h1>Tutti i tag</h1>
             </div>
             <table class="table">
                 <thead>
@@ -18,17 +15,16 @@
                         <th>Nome</th>
                         <th>Slug</th>
                         <th>Count post</th>
-                        {{-- <th >Azioni</th> --}}
+                        <th >Azioni</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($categories as $category)
+                    @foreach ($tags as $tag)
                     <tr>
-                        <td>{{ $category->id }}</td>
-                        <td>{{ $category->name}}</td>
-                         <td>{{ $category->slug }}</td>
-                         <td>{{ count($category->posts) }}</td>
-
+                        <td>{{ $tag->id }}</td>
+                        <td>{{ $tag->name}}</td>
+                         <td>{{ $tag->slug }}</td>
+                         {{-- <td>{{ count($tag->posts) }}</td> --}}
                     </tr>
                     @endforeach
                 </tbody>

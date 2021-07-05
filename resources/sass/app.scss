@@ -6,3 +6,13 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+.nav-item.active {
+    background-color: #204e7c;
+    color: white;
+
+    a {
+        color: white;
+    }
+}
+

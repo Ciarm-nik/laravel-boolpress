@@ -13,12 +13,19 @@
                 <dl>
                     <dt>Titolo</dt>
                     <dd>{{ $post->title }}</dd>
+                    <dt>Tags</dt>
+                    <dd>
+                    @foreach($post->tags as $tag)
+                    <span class="badge badge-primary">{{$tag->name}}</span>
+                        
+                    @endforeach
+                    </dd>
                     {{-- <dt>Slug</dt>
                     <dd>{{ $post->slug }}</dd> --}}
                     <dt>Contenuto</dt>
                     <dd>{{ $post->content }}</dd>
-                    {{-- <dt>Categoria</dt> --}}
-                    {{-- <dd>{{ $post->category ? $post->category->name : '-' }}</dd> --}}
+                    <dt>Categoria</dt>
+                    <dd>{{ $post->category ? $post->category->name : '-' }}</dd>
                     <dt>Utente</dt>
                     <dd>{{ $post->user->name }} ({{ $post->user->email }})</dd>
 

@@ -29,6 +29,8 @@ Route::prefix('admin')
     ->name("admin.")
     ->group(function () {
         Route::get('/', 'HomeController@index')->name('index');
+        Route::get('/categories', 'CategoryController@index')->name('categories.index');
+
 
         // Route::get('/posts', 'PostController@index')->name('home');
 

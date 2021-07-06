@@ -38,4 +38,5 @@ Route::prefix('admin')
         Route::resource("/posts", "PostController");
 
         Route::resource("/users", "UserController");
+
     });

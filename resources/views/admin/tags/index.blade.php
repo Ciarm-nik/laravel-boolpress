@@ -14,8 +14,8 @@
                         <th>ID</th>
                         <th>Nome</th>
                         <th>Slug</th>
-                        <th>Count post</th>
-                        <th >Azioni</th>
+                        <th>Count tags</th>
+                        {{-- <th>Azioni</th> --}}
                     </tr>
                 </thead>
                 <tbody>
@@ -23,8 +23,8 @@
                     <tr>
                         <td>{{ $tag->id }}</td>
                         <td>{{ $tag->name}}</td>
-                         <td>{{ $tag->slug }}</td>
-                         {{-- <td>{{ count($tag->posts) }}</td> --}}
+                        <td>{{ $tag->slug }}</td>
+                        <td>{{ count($tag->posts) }}</td>
                     </tr>
                     @endforeach
                 </tbody>

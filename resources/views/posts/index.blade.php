@@ -22,7 +22,7 @@
 
             <br>
 
-            <a href="{{ route('posts.show', ['slug' => $post->slug ]) }}">Apri...</a>
+            <a href="{{ route('posts.show') }}">Apri...</a>
 
           </div>
         </div>

@@ -7,7 +7,7 @@
       <div class="d-flex justify-content-between align-items-center mb-5">
         <div>
           <h1>{{ $post->title }}</h1>
-          {{ $post->updated_at }} | {{ $post->slug }} | {{ $post->category ? $post->category->name : '-' }}
+          {{ $post->updated_at }} | {{ $post->category ? $post->category->name : '-' }}
         </div>
 
         <a href="{{ route('posts.index') }}" class="btn btn-primary">

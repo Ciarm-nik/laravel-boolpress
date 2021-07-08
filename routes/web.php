@@ -17,6 +17,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index')->name("index");
 Route::get('/posts', 'PostController@index')->name("posts.index");
+Route::get('/posts', 'PostController@show')->name("posts.show");
+
+// Route::resource("/posts", "PostController");
+
+
 
 
 Auth::routes();

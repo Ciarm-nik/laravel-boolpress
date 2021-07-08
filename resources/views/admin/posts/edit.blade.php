@@ -28,6 +28,8 @@
                 @csrf
                 @method('PUT')
 
+                {{-- <input type="file" name="PostCover" accept=".jpg, .png"> --}}
+
                 <div class="form-group">
                     <label>Titolo</label>
                     <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" placeholder="Inserisci il titolo" value="{{ old('title', $post->title) }}" required>

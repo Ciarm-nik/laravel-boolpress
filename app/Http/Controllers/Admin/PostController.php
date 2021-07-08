@@ -9,8 +9,7 @@ use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
-
-
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -36,8 +35,9 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
+        $tags = Tag::all();
 
-        return view("admin.posts.create", ["categories" => $categories]);
+        return view("admin.posts.create", ["categories" => $categories, "tags"=>$tags]);
     }
 
     /**
@@ -60,6 +60,10 @@ class PostController extends Controller
         $newPost->user_id = $request->user()->id;
 
         $newPost->save();
+
+        $newPost->tags()->sync($newPostData["tags"]);
+
+
 
         return redirect()->route('admin.posts.index', $newPost->id);
     }
@@ -117,6 +121,8 @@ class PostController extends Controller
         if (!key_exists("tags", $formData)) {
             $formData["tags"] = [];
         }
+
+    //    Storage::put("postCovers",$formData["postCover"]);
         // $post->tags()->detach();
         // $post->tags()->attach($formData["tags"]);
 

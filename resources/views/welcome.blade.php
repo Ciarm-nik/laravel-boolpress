@@ -95,7 +95,7 @@
                 <a href="https://forge.laravel.com">Forge</a>
                 <a href="https://vapor.laravel.com">Vapor</a>
                 <a href="https://github.com/laravel/laravel">GitHub</a> --}}
-                {{-- <a class="display-4" href="{{ route("posts.index") }}">Vai ai post publici</a> --}}
+                <a class="display-4" href="{{ route("posts.index") }}">Vai ai post pubblici</a>
 
             </div>
         </div>

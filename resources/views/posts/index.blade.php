@@ -1,4 +1,4 @@
-@extends('layout.public')
+@extends('layouts.public')
 
 @section('content')
 <div class="row justify-content-center">
@@ -22,7 +22,7 @@
 
             <br>
 
-            <a href="{{ route('posts.show') }}">Apri...</a>
+            <a href="{{ route('posts.show', $post) }}">Apri...</a>
 
           </div>
         </div>

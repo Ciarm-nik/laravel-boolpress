@@ -24,11 +24,15 @@
                 </div>
                 @endif
             </div>
+
+             @if($post->cover_url)
+            <img src="{{asset('storage/' . $post->cover_url)}}" alt="" style="width: 100%; max-height: 150px; object-fit:cover">
+            @endif
             <form action="{{ route('admin.posts.update', ['post' => $post->id]) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
-                {{-- <input type="file" name="PostCover" accept=".jpg, .png"> --}}
+                <input type="file" name="postCover" accept=".jpg, .png">
 
                 <div class="form-group">
                     <label>Titolo</label>

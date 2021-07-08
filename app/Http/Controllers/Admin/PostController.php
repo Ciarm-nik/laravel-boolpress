@@ -37,7 +37,7 @@ class PostController extends Controller
         $categories = Category::all();
         $tags = Tag::all();
 
-        return view("admin.posts.create", ["categories" => $categories, "tags"=>$tags]);
+        return view("admin.posts.create", ["categories" => $categories, "tags" => $tags]);
     }
 
     /**
@@ -122,7 +122,16 @@ class PostController extends Controller
             $formData["tags"] = [];
         }
 
-    //    Storage::put("postCovers",$formData["postCover"]);
+        if (key_exists("postCover", $formData)) {
+            if($post->cover_url){
+                Storage::delete($post->cover_url);
+            }
+
+            $storageResult = Storage::put("postCovers", $formData["postCover"]);
+
+            $formData["cover_url"] = $storageResult;
+        }
+
         // $post->tags()->detach();
         // $post->tags()->attach($formData["tags"]);
 
